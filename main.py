@@ -37,7 +37,7 @@ def make_pack(start: int, end: int):
     # not_known_coin_list = list(filter(lambda coin: coin['id'] not in coin_list, known_list))
     pack_crypto_list = random.sample(not_known_coin_list, min(len(not_known_coin_list), 100))
     number_of_coin_to_get = len(pack_crypto_list)
-    # max time beetwen two requests: 50/60 = 0.83
+    # max time beetwen two requests: 60/50 = 1.2
     start_time = time.time()
     number_of_got = 0
     for coin in pack_crypto_list:
@@ -45,9 +45,9 @@ def make_pack(start: int, end: int):
         # TODO: decide what to do with this
         # TODO: compute now or store in a list for later
         number_of_got += 1
-        min_expected_time = number_of_got * 0.83
+        min_expected_time = number_of_got * 1.2
         elapsed_time = time.time() - start_time
-        print(f'Got coin {coin["id"]}, time {elapsed_time}/{min_expected_time}')
+        print(f'{number_of_got}) Got coin {coin["id"]}, time {elapsed_time}/{min_expected_time}')
         if elapsed_time < min_expected_time:
             print('too fast, pausing!')
             time.sleep(min_expected_time - elapsed_time)
