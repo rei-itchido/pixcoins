@@ -6,8 +6,16 @@ import random
 import time
 import urllib3
 
+"""
+Tool to download
+"""
 
-def get_parser():
+
+def get_parser() -> argparse.ArgumentParser:
+    """
+    Define and return the command line arguments
+    :return: the parser for the command line arguments
+    """
     parser = argparse.ArgumentParser(description='Pixcoins grabber')
     group = parser.add_mutually_exclusive_group()
     group.add_argument('-m', '--make', nargs=1, metavar='name',
@@ -19,7 +27,13 @@ def get_parser():
     return parser
 
 
-def wait_if_needed(start_time, requests_done):
+def wait_if_needed(start_time: float, requests_done: int):
+    """
+    Pause the app to respect the 50 requests max per minute
+    :param start_time: the time of the first request of the period
+    :param requests_done: number of requests done since start_time
+    :return: None
+    """
     # max time between two requests: 60/50 = 1.2
     min_expected_time = requests_done * 1.2
     elapsed_time = time.time() - start_time
@@ -28,7 +42,12 @@ def wait_if_needed(start_time, requests_done):
         time.sleep(min_expected_time - elapsed_time)
 
 
-def make_pack(name):
+def make_pack(name: str):
+    """
+    Build a pack with 100 unknown coins
+    :param name: name of the pack
+    :return: None
+    """
     pack_name = f'pack-{name}'
     pack_path = Path('packs', pack_name)
     if pack_path.is_dir():
@@ -67,6 +86,11 @@ def make_pack(name):
 
 
 def get_file_extension_from_url(url: str) -> str | None:
+    """
+    Extract the extension of the file in the given url
+    :param url: The url of the file
+    :return: the found extension or None
+    """
     if url.find('/'):
         name, _ = url.rsplit('/', 1)[1].split('?')
         return name.rsplit('.', 1)[1]
@@ -74,6 +98,10 @@ def get_file_extension_from_url(url: str) -> str | None:
 
 
 def generate_known_json():
+    """
+    Generate a json with known images
+    :return: None
+    """
     known_list = []
     for pack in Path('packs').iterdir():
         if pack.is_dir():
@@ -88,6 +116,11 @@ def generate_known_json():
 
 
 def generate_csv(name: str):
+    """
+    Generate a csv
+    :param name: pack name
+    :return: None
+    """
     print(f'start csv {name}')
 
 
