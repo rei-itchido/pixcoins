@@ -19,11 +19,11 @@ def get_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(description='Pixcoins grabber')
     group = parser.add_mutually_exclusive_group()
     group.add_argument('-m', '--make', nargs=1, metavar='name',
-                       type=str, help='Make a pack from start to end')
+                       type=str, help='Make a pack with given name')
     group.add_argument('-k', '--known-json', action='store_true',
                        help='Generate known.json from already generated packs')
     group.add_argument('-c', '--csv', nargs=1, metavar='name',
-                       type=str, help='Generate csv from start to end')
+                       type=str, help='Generate csv for given pack name')
     return parser
 
 
