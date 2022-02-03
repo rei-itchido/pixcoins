@@ -7,7 +7,7 @@ import time
 import urllib3
 
 """
-Tool to download
+Tool to download crypto coins images
 """
 
 
